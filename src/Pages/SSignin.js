@@ -15,6 +15,7 @@ const SSignin = () => {
     const [formValues, setFormValues] = useState({
         email:"",
         password:"",
+        role:"Student"
     });
 
     const handleChange= (e)=>{
@@ -54,6 +55,7 @@ const SSignin = () => {
                 const response = await axios.post(`https://classroom-backend-alpha.vercel.app/api/user/login`, {
                     email: formValues.email,
                     password: formValues.password,
+                    role: formValues.role,
                 });
                 if (response.data) {
                     const { token, user } = response.data;
