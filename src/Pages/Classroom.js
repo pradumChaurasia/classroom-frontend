@@ -16,7 +16,8 @@ const Classroom = () => {
     useEffect(() => {
         const fetchClassrooms = async () => {
             try {
-                const response = await axios.get('http://localhost:3000/api/classroom/getAllClassrooms');
+                // const response = await axios.get('http://localhost:3000/api/classroom/getAllClassrooms');
+                const response = await axios.get('https://classroom-backend-alpha.vercel.app/api/classroom/getAllClassrooms');
                 setClassrooms(response.data.classrooms);
             } catch (error) {
                 console.error('Error fetching classrooms:', error);
@@ -34,7 +35,8 @@ const Classroom = () => {
 
     const openModal = async (studentId) => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/classroom/getStudentDetails/${studentId}`);
+            // const response = await axios.get(`http://localhost:3000/api/classroom/getStudentDetails/${studentId}`);
+            const response = await axios.get(`https://classroom-backend-alpha.vercel.app/api/classroom/getStudentDetails/${studentId}`);
             setSelectedStudent(response.data);
             setModalIsOpen(true);
         } catch (error) {

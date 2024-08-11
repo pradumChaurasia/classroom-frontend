@@ -74,7 +74,8 @@ const TRegister = () => {
       if (isValid) {
 
           try {
-              await axios.post(`http://localhost:3000/api/user/register`, {
+            //   await axios.post(`http://localhost:3000/api/user/register`, {
+              await axios.post(`https://classroom-backend-alpha.vercel.app/api/user/register`, {
                   email: formValues.email,
                   password: formValues.password,
                   name: `${formValues.firstName} ${formValues.lastName}`,

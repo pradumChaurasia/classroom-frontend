@@ -24,7 +24,8 @@ const TDashboard = () => {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const response = await axios.get(`http://localhost:3000/api/classroom/getTeacherClassroom/${user._id}`);
+        // const response = await axios.get(`http://localhost:3000/api/classroom/getTeacherClassroom/${user._id}`);
+        const response = await axios.get(`https://classroom-backend-alpha.vercel.app/api/classroom/getTeacherClassroom/${user._id}`);
         if (response.data.message) {
           toast.info(response.data.message);
 
@@ -49,7 +50,8 @@ const TDashboard = () => {
   const saveUpdatedUser = async () => {
     setLoading(true)
     try {
-      const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
+      // const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
+      const response = await axios.put(`https://classroom-backend-alpha.vercel.app/api/user/updateUser/${currentUser.id}`, {
         name: currentUser.name,
         email: currentUser.email
       });
@@ -72,7 +74,8 @@ const TDashboard = () => {
 
   const handleDeleteStudent = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/api/classroom/deleteStudent/${id}`);
+      // const response = await axios.delete(`http://localhost:3000/api/classroom/deleteStudent/${id}`);
+      const response = await axios.delete(`https://classroom-backend-alpha.vercel.app/api/classroom/deleteStudent/${id}`);
 
       if (response.status === 200) {
         toast.success('Student deleted successfully');

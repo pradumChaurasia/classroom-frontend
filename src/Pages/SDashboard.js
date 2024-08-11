@@ -20,7 +20,8 @@ const SDashboard = () => {
     const fetchClassrooms = async () => {
       setLoading(true);
       try {
-        const response = await axios.get(`http://localhost:3000/api/classroom/getStudentInvolveClassroom/${user._id}`);
+        // const response = await axios.get(`http://localhost:3000/api/classroom/getStudentInvolveClassroom/${user._id}`);
+        const response = await axios.get(`https://classroom-backend-alpha.vercel.app/api/classroom/getStudentInvolveClassroom/${user._id}`);
         setClassrooms(response.data.classrooms);
         setLoading(false);
       } catch (error) {

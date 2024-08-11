@@ -46,7 +46,8 @@ const PDashboard = () => {
         const getUsers = async () => {
 
             try {
-                const response = await axios.get('http://localhost:3000/api/user/getUsers')
+                // const response = await axios.get('http://localhost:3000/api/user/getUsers')
+                const response = await axios.get('https://classroom-backend-alpha.vercel.app/api/user/getUsers')
                 setTeachers(response.data.teachers || [])
                 setStudents(response.data.students || [])
             }
@@ -70,7 +71,8 @@ const PDashboard = () => {
     const saveUpdatedUser = async () => {
         setLoading(true)
         try {
-            const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
+            // const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
+            const response = await axios.put(`https://classroom-backend-alpha.vercel.app/api/user/updateUser/${currentUser.id}`, {
                 name: currentUser.name,
                 email: currentUser.email
             });
@@ -119,7 +121,8 @@ const PDashboard = () => {
                 const principalEmail = user.email;
     
                
-                const classroomResponse = await axios.post('http://localhost:3000/api/classroom/create', {
+                // const classroomResponse = await axios.post('http://localhost:3000/api/classroom/create', {
+                const classroomResponse = await axios.post('https://classroom-backend-alpha.vercel.app/api/classroom/create', {
                     name, startTime, endTime, days, principalEmail, teacherId: teacher?.value
                 });
     
@@ -127,7 +130,8 @@ const PDashboard = () => {
     
                 if (students.length > 0) {
                     const studentIds = students.map(student => student.value);
-                    await axios.post('http://localhost:3000/api/classroom/add-students', {
+                    // await axios.post('http://localhost:3000/api/classroom/add-students', {
+                    await axios.post('https://classroom-backend-alpha.vercel.app/api/classroom/add-students', {
                         classroomId, studentIds, requesterEmail: principalEmail
                     });
                 }
@@ -158,7 +162,8 @@ const PDashboard = () => {
 
     const handleDeleteStudent = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/classroom/deleteStudent/${id}`);
+            // const response = await axios.delete(`http://localhost:3000/api/classroom/deleteStudent/${id}`);
+            const response = await axios.delete(`https://classroom-backend-alpha.vercel.app/api/classroom/deleteStudent/${id}`);
 
             if (response.status === 200) {
                 toast.success('Student Deleted Successfully');
@@ -171,7 +176,8 @@ const PDashboard = () => {
 
     const handleDeleteTeacher = async (id) => {
         try {
-            const response = await axios.delete(`http://localhost:3000/api/classroom/deleteTeacher/${id}`);
+            // const response = await axios.delete(`http://localhost:3000/api/classroom/deleteTeacher/${id}`);
+            const response = await axios.delete(`https://classroom-backend-alpha.vercel.app/api/classroom/deleteTeacher/${id}`);
 
             if (response.status === 200) {
                 toast.success('Teacher Deleted Successfully');
