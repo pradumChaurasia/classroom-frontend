@@ -10,13 +10,15 @@ import { loginSuccess } from '../redux/actions/userActions';
 const SRegister = () => {
 
     const dispatch = useDispatch()
-    const {token, user} = useSelector(state=>state.user)
+    const { token, user } = useSelector(state => state.user)
     const [formValues, setFormValues] = useState({
         firstName: "",
         lastName: "",
         email: "",
         password: "",
         confirmPassword: "",
+        phoneNumber: "",
+        rollNumber: "",
         role: "Student"
     });
 
@@ -66,6 +68,16 @@ const SRegister = () => {
             isValid = false;
         }
 
+        if (values.phoneNumber === "") {
+            errors.phoneNumber = "Please Enter a Phone Number"
+            isValid = false;
+        }
+
+        if (values.rollNumber === "") {
+            errors.phoneNumber = "Please Enter a Roll Number"
+            isValid = false;
+        }
+
         return { isValid, errors };
     };
 
@@ -81,6 +93,8 @@ const SRegister = () => {
                     password: formValues.password,
                     name: `${formValues.firstName} ${formValues.lastName}`,
                     role: formValues.role,
+                    phoneNumber: formValues.phoneNumber,
+                    rollNumber: formValues.rollNumber,
                     creatorEmail: user?.email
                 });
                 toast.success("Student Registered Successfully!", {
@@ -143,7 +157,21 @@ const SRegister = () => {
                             value={formValues.confirmPassword}
                             onChange={handleChange}
                         />
-                        <input  
+                        <input
+                            type="number"
+                            placeholder='Phone Number'
+                            name='phoneNumber'
+                            value={formValues.phoneNumber}
+                            onChange={handleChange}
+                        />
+                        <input
+                            type="number"
+                            placeholder='Roll Number'
+                            name='rollNumber'
+                            value={formValues.rollNumber}
+                            onChange={handleChange}
+                        />
+                        <input
                             type="disable"
                             name='role'
                             value={formValues.role}

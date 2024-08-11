@@ -19,7 +19,7 @@ const PDashboard = () => {
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [isEditModalOpen2, setIsEditModalOpen2] = useState(false);
 
-    const [currentUser, setCurrentUser] = useState({ name: '', email: '', id: '' });
+    const [currentUser, setCurrentUser] = useState({ name: '', email: '', id: '',phoneNumber: '',rollNumber:''});
     const [loading, setLoading] = useState(false);
     const [studentDelete, setStudentDelete] = useState(null)
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
@@ -60,11 +60,11 @@ const PDashboard = () => {
     console.log(teachers, students)
 
     const handleEditUser = (user) => {
-        setCurrentUser({ name: user.name, email: user.email, id: user._id });
+        setCurrentUser({ name: user.name, email: user.email, id: user._id , phoneNumber: user.phoneNumber});
         setIsEditModalOpen(true);
     };
     const handleEditUser2 = (user) => {
-        setCurrentUser({ name: user.name, email: user.email, id: user._id });
+        setCurrentUser({ name: user.name, email: user.email, id: user._id ,phoneNumber: user.phoneNumber, rollNumber: user.rollNumber });
         setIsEditModalOpen2(true);
     };
 
@@ -74,7 +74,9 @@ const PDashboard = () => {
             // const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
             const response = await axios.put(`https://classroom-backend-alpha.vercel.app/api/user/updateUser/${currentUser.id}`, {
                 name: currentUser.name,
-                email: currentUser.email
+                email: currentUser.email,
+                phoneNumber:currentUser.phoneNumber,
+                rollNumber:currentUser.rollNumber,
             });
 
             if (response.status === 200) {
@@ -234,6 +236,7 @@ const PDashboard = () => {
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Phone Number</th>
                                                 <th className="text-right">Action</th>
                                             </tr>
                                         </thead>
@@ -242,6 +245,7 @@ const PDashboard = () => {
                                                 <tr key={teacher._id}>
                                                     <td>{teacher.name}</td>
                                                     <td>{teacher.email}</td>
+                                                    <td>{teacher.phoneNumber}</td>
                                                     <td className="text-right">
                                                         <button className="btn btn-warning btn-sm mr-2" onClick={() => handleEditUser(teacher)}>Edit</button>
                                                         <button className="btn btn-danger btn-sm" onClick={() => confirmDeleteTask1(teacher._id)}>Delete</button>
@@ -259,6 +263,8 @@ const PDashboard = () => {
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
+                                                <th>Phone Number</th>
+                                                <th>Roll Number</th>
                                                 <th className="text-right">Action</th>
                                             </tr>
                                         </thead>
@@ -267,6 +273,8 @@ const PDashboard = () => {
                                                 <tr key={student._id}>
                                                     <td>{student.name}</td>
                                                     <td>{student.email}</td>
+                                                    <td>{student.phoneNumber}</td>
+                                                    <td>{student.rollNumber}</td>
                                                     <td className="text-right">
                                                         <button className="btn btn-warning btn-sm mr-2" onClick={() => handleEditUser2(student)}>Edit</button>
                                                         <button className="btn btn-danger btn-sm" onClick={() => confirmDeleteTask(student._id)}>Delete</button>
@@ -301,6 +309,14 @@ const PDashboard = () => {
                                             onChange={(e) => setCurrentUser({ ...currentUser, email: e.target.value })}
                                         />
                                     </div>
+                                    <div className='modal-title'>
+                                        <p>Phone Number</p>
+                                        <input
+                                            type="text"
+                                            value={currentUser.phoneNumber}
+                                            onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
+                                        />
+                                    </div>
                                 </div>
                                 <div className="modal-buttons">
                                     <button className='modal-button1' onClick={saveUpdatedUser}>Save</button>
@@ -327,6 +343,22 @@ const PDashboard = () => {
                                         <input
                                             value={currentUser.email}
                                             onChange={(e) => setCurrentUser({ ...currentUser, email: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className='modal-title'>
+                                        <p>Phone Number</p>
+                                        <input
+                                            type="text"
+                                            value={currentUser.phoneNumber}
+                                            onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
+                                        />
+                                    </div>
+                                    <div className='modal-title'>
+                                        <p>Roll Number</p>
+                                        <input
+                                            type="text"
+                                            value={currentUser.rollNumber}
+                                            onChange={(e) => setCurrentUser({ ...currentUser, rollNumber: e.target.value })}
                                         />
                                     </div>
                                 </div>

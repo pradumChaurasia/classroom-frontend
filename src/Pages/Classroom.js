@@ -88,7 +88,9 @@ const Classroom = () => {
                     overlayClassName="overlay"
                 >
                     <h2>{selectedStudent.student.name}</h2>
-                    <p>Email: {selectedStudent.student.email}</p>
+                    <p><b>Email:</b> {selectedStudent.student.email}</p>
+                    <p><b>Phone Number:</b> {selectedStudent.student.phoneNumber}</p>
+                    <p><b>Roll Number:</b> {selectedStudent.student.rollNumber}</p>
                     <h4>Enrolled Classrooms:</h4>
                     <ul>
                         {selectedStudent.classrooms.map((classroom) => (

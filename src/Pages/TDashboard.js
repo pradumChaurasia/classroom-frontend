@@ -14,7 +14,7 @@ const TDashboard = () => {
   const [classroom, setClassroom] = useState([])
   const [loading, setLoading] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
-  const [currentUser, setCurrentUser] = useState({ name: '', email: '', id: '' });
+  const [currentUser, setCurrentUser] = useState({ name: '', email: '', id: '', phoneNumber: '', rollNumber: '' });
   const { token, user } = useSelector(state => state.user)
   const navigate = useNavigate();
   const [studentDelete, setStudentDelete] = useState(null)
@@ -43,7 +43,7 @@ const TDashboard = () => {
     fetchStudents();
   }, [user._id, loading]);
   const handleEditUser = (user) => {
-    setCurrentUser({ name: user.name, email: user.email, id: user._id });
+    setCurrentUser({ name: user.name, email: user.email, id: user._id, phoneNumber: user.phoneNumber, rollNumber: user.rollNumber });
     setIsEditModalOpen(true);
   };
 
@@ -53,7 +53,9 @@ const TDashboard = () => {
       // const response = await axios.put(`http://localhost:3000/api/user/updateUser/${currentUser.id}`, {
       const response = await axios.put(`https://classroom-backend-alpha.vercel.app/api/user/updateUser/${currentUser.id}`, {
         name: currentUser.name,
-        email: currentUser.email
+        email: currentUser.email,
+        phoneNumber: currentUser.phoneNumber,
+        rollNumber: currentUser.rollNumber
       });
 
       if (response.status === 200) {
@@ -109,12 +111,12 @@ const TDashboard = () => {
           <>
             <div className="principal-container">
               <h2>Teacher Dashboard</h2>
-              <div className='Register-user' style={{marginBottom:'20px'}}>
+              <div className='Register-user' style={{ marginBottom: '20px' }}>
                 <button onClick={() => navigate('/register-student')}>Register Student</button>
               </div>
               <h3 className="">Classroom name: <span className='classroom-name2'>{classroom.map((cls) => cls.name)}</span></h3>
 
-              
+
 
               {
                 students.length > 0 ? (
@@ -125,6 +127,8 @@ const TDashboard = () => {
                         <tr>
                           <th>Name</th>
                           <th>Email</th>
+                          <th>Phone Number</th>
+                          <th>Roll Number</th>
                           <th className="text-right">Action</th>
                         </tr>
                       </thead>
@@ -133,6 +137,8 @@ const TDashboard = () => {
                           <tr key={student._id}>
                             <td>{student.name}</td>
                             <td>{student.email}</td>
+                            <td>{student.phoneNumber}</td>
+                            <td>{student.rollNumber}</td>
                             <td className="text-right">
                               <button className="btn btn-warning btn-sm mr-2" onClick={() => handleEditUser(student)}>Edit</button>
                               <button className="btn btn-danger btn-sm" onClick={() => confirmDeleteTask(student._id)}>Delete</button>
@@ -168,6 +174,22 @@ const TDashboard = () => {
                   <input
                     value={currentUser.email}
                     onChange={(e) => setCurrentUser({ ...currentUser, email: e.target.value })}
+                  />
+                </div>
+                <div className='modal-title'>
+                  <p>Phone Number</p>
+                  <input
+                    type="text"
+                    value={currentUser.phoneNumber}
+                    onChange={(e) => setCurrentUser({ ...currentUser, phoneNumber: e.target.value })}
+                  />
+                </div>
+                <div className='modal-title'>
+                  <p>Roll Number</p>
+                  <input
+                    type="text"
+                    value={currentUser.rollNumber}
+                    onChange={(e) => setCurrentUser({ ...currentUser, rollNumber: e.target.value })}
                   />
                 </div>
               </div>
